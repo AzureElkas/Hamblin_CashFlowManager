@@ -8,7 +8,7 @@ namespace Hamblin_CashFlowManager
 {
     class Invoice : IPayable
     {
-        public Invoice(string partNumber, string partDescription, int quantity, decimal price)
+        public Invoice(string partNumber, string partDescription, int quantity, decimal price, LedgerType type)
         {
             PartNumber = partNumber;
             PartDescription = partDescription;
@@ -25,5 +25,14 @@ namespace Hamblin_CashFlowManager
         public int Quantity { get; }
         public string PartDescription { get; }
         public decimal Price { get; }
+        public override string ToString()
+        {
+            return Type + ": " + PartNumber.ToString() + "\n" +
+                "Quantity: " + Quantity + "\n" +
+                "Part Description: " + PartDescription + "\n" +
+                "Unit Price: " + Price + "\n" +
+                "Extended Price: ";
+            //Add extended later
+        }
     }
 }

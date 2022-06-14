@@ -8,17 +8,18 @@ namespace Hamblin_CashFlowManager
 {
     class Employee : IPayable
     {
-        public Employee(string firstName, string lastName, string SSNF)
+        public Employee(string firstName, string lastName, string SSNF, LedgerType type)
         {
             NameFirst = firstName;
             NameLast = lastName;
             SSN = SSNF;
+            Type = type;
         }
         public LedgerType Type { get; }
 
         public decimal GetPayableAmount()
         {
-            throw new NotImplementedException();
+            return 1M;
         }
         public virtual decimal Earnings()
         {

@@ -8,9 +8,10 @@ namespace Hamblin_CashFlowManager
 {
     class SalariedEmployee : Employee
     {
-        public SalariedEmployee(string firstName, string lastName, string SSN) : base( firstName,  lastName,  SSN)
+        decimal _weeklySalary;
+        public SalariedEmployee(string firstName, string lastName, string SSN, LedgerType type, decimal weeklySalary) : base( firstName,  lastName,  SSN, type)
         {
-
+            _weeklySalary = weeklySalary;
         }
         public override decimal Earnings()
         {
@@ -18,7 +19,7 @@ namespace Hamblin_CashFlowManager
         }
         public override string ToString()
         {
-            return "Salaried employee: " + NameFirst + " " + NameLast + "\n" +
+            return Type + " employee: " + NameFirst + " " + NameLast + "\n" +
                 "SSN: " + SSN;
         }
     }

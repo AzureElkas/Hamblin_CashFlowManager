@@ -8,7 +8,7 @@ namespace Hamblin_CashFlowManager
 {
     class HourlyEmployee : Employee
     {
-        public HourlyEmployee(string firstName, string lastName, string SSN) : base( firstName,  lastName,  SSN)
+        public HourlyEmployee(string firstName, string lastName, string SSN, LedgerType type, decimal hourlyWage, int hoursWorked) : base( firstName,  lastName,  SSN, type)
         {
             
         }
@@ -18,7 +18,7 @@ namespace Hamblin_CashFlowManager
         }
         public override string ToString()
         {
-            return "Hourly employee: " + NameFirst + " " + NameLast + "\n" +
+            return Type + " employee: " + NameFirst + " " + NameLast + "\n" +
                 "SSN: " + SSN;
         }
     }
