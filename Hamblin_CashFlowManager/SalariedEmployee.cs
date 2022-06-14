@@ -8,14 +8,14 @@ namespace Hamblin_CashFlowManager
 {
     class SalariedEmployee : Employee
     {
-        decimal _weeklySalary;
+        private decimal _weeklySalary;
+        private decimal _finalPay;
         public SalariedEmployee(string firstName, string lastName, string SSN, LedgerType type, decimal weeklySalary) : base( firstName,  lastName,  SSN, type)
         {
             _weeklySalary = weeklySalary;
-        }
-        public override decimal Earnings()
-        {
-            return 1M;
+
+            //For after calculation
+            SetFinal(_finalPay);
         }
         public override string ToString()
         {

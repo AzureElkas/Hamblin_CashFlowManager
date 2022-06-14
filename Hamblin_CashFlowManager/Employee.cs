@@ -8,6 +8,7 @@ namespace Hamblin_CashFlowManager
 {
     class Employee : IPayable
     {
+        private decimal _finalTotal;
         public Employee(string firstName, string lastName, string SSNF, LedgerType type)
         {
             NameFirst = firstName;
@@ -19,12 +20,11 @@ namespace Hamblin_CashFlowManager
 
         public decimal GetPayableAmount()
         {
-            return 1M;
+            return _finalTotal;
         }
-        public virtual decimal Earnings()
+        protected void SetFinal(decimal final)
         {
-            //Example to prevent exceptions, remove later
-            return 1M;
+            _finalTotal = final;
         }
         public string NameFirst { get; }
         public string NameLast { get; }
