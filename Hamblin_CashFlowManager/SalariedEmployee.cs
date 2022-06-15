@@ -13,14 +13,16 @@ namespace Hamblin_CashFlowManager
         public SalariedEmployee(string firstName, string lastName, string SSN, LedgerType type, decimal weeklySalary) : base( firstName,  lastName,  SSN, type)
         {
             _weeklySalary = weeklySalary;
-
+            _finalPay = _weeklySalary;
             //For after calculation
             SetFinal(_finalPay);
         }
         public override string ToString()
         {
             return Type + " employee: " + NameFirst + " " + NameLast + "\n" +
-                "SSN: " + SSN;
+                "SSN: " + SSN + "\n" +
+                "Weekly Salary: " + _weeklySalary.ToString("C2") + "\n" +
+                "Earned: " + _finalPay.ToString("C2") + "\n";
         }
     }
 }

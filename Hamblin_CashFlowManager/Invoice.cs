@@ -8,18 +8,21 @@ namespace Hamblin_CashFlowManager
 {
     class Invoice : IPayable
     {
+        private decimal _final;
         public Invoice(string partNumber, string partDescription, int quantity, decimal price, LedgerType type)
         {
             PartNumber = partNumber;
             PartDescription = partDescription;
             Quantity = quantity;
             Price = price;
+            Type = type;
+            _final = price * quantity;
         }
         public LedgerType Type { get; }
 
         public decimal GetPayableAmount()
         {
-            throw new NotImplementedException();
+            return _final;
         }
         public string PartNumber { get; }
         public int Quantity { get; }
@@ -30,9 +33,8 @@ namespace Hamblin_CashFlowManager
             return Type + ": " + PartNumber.ToString() + "\n" +
                 "Quantity: " + Quantity + "\n" +
                 "Part Description: " + PartDescription + "\n" +
-                "Unit Price: " + Price + "\n" +
-                "Extended Price: ";
-            //Add extended later
+                "Unit Price: " + Price.ToString("C2") + "\n" +
+                "Extended Price: " + _final.ToString("C2") + "\n";
         }
     }
 }
