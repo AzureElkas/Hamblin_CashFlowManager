@@ -40,6 +40,7 @@ namespace Hamblin_CashFlowManager
             //inNumberSecond = rand.Next(4);
             //inNumberFull = inNumberFirst.ToString() + "_" + inNumberSecond.ToString();
             payments[5] = new Invoice(RandomNumGen(), "Flux Capacitor", 3, 14.50M, LedgerType.Invoice);
+            //If these werent automatically added I would increment the counter, but it seems redundant since they are
             int arrayPlacement = 6;
 
             while (keepLoop && arrayPlacement < 20)
@@ -107,6 +108,7 @@ namespace Hamblin_CashFlowManager
                         //inNumberSecond = rand.Next(4);
                         //inNumberFull = inNumberFirst.ToString() + "_" + inNumberSecond.ToString();
                         payments[arrayPlacement] = new Invoice(RandomNumGen(), partDescrip, partQuantity, partCost, LedgerType.Invoice);
+                        arrayPlacement++;
                         break;
                     case "4":
                         Console.Clear();
@@ -118,14 +120,14 @@ namespace Hamblin_CashFlowManager
                         Console.WriteLine("Invalid input, please try again");
                         break;
                 }
-            }
-            if (arrayPlacement >= 20)
-            {
-                Console.Clear();
-                Console.WriteLine("List space exceeded, displaying output");
-                FinalCalculation(payments, arrayPlacement);
-                Console.WriteLine("Thank you for using this Cashflow Manager");
-                keepLoop = false;
+                if (arrayPlacement >= 20)
+                {
+                    Console.Clear();
+                    Console.WriteLine("List space exceeded, displaying output");
+                    FinalCalculation(payments, arrayPlacement);
+                    Console.WriteLine("Thank you for using this Cashflow Manager");
+                    keepLoop = false;
+                }
             }
         }
         //Not sure why it needs to be static, look into it
