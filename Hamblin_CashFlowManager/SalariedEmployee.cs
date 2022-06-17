@@ -14,7 +14,6 @@ namespace Hamblin_CashFlowManager
         {
             _weeklySalary = weeklySalary;
             _finalPay = _weeklySalary;
-            //For after calculation
             SetFinal(_finalPay);
         }
         public override string ToString()

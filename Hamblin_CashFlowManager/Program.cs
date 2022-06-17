@@ -7,6 +7,10 @@
  * I could've done better, no doubt in my mind, could've made it cleaner, more advanced, etc, there's a number of little details \n
  * that could be improved if I had more time, but frankly I'm frustrated and exhausted and I have other work for other classes that needs doing, \n
  * so time isn't something I have the luxury of. I hope at the very least it's functional enough to meet the criteria, it seems to be from my testing but cant be sure
+ * 
+ * Addendum, I realized absolutely last minute that the rubric said no calculations in main, so I had to very shoddily move my logic into another class. \n
+ * If I had more time it would've been made to feel more natural or placed under an existing class, maybe making use of the ledger file
+ * 
  * BEHAVIORS NOT IMPLEMENTED AND WHY: None to my knowledge, save some things listed on the UML diagram that werent mandatory such as Earnings();
 */
 namespace Hamblin_CashFlowManager
@@ -16,10 +20,7 @@ namespace Hamblin_CashFlowManager
 
         static void Main(string[] args)
         {
-            //TODO, implement better try parse on salary and other
-            //string inNumberFull;
-            //int inNumberFirst;
-            //int inNumberSecond;
+            Processing processor = new Processing();
             string response;
             bool keepLoop = true;
             string nameFirst;
@@ -32,13 +33,7 @@ namespace Hamblin_CashFlowManager
             payments[1] = new SalariedEmployee("Susan", "Mathews", "222-22-222", LedgerType.Salaried, 1110M);
             payments[2] = new HourlyEmployee("Karen", "Williams", "4444-44-4444", LedgerType.Hourly, 16.75M, 40);
             payments[3] = new HourlyEmployee("Carol", "Walsh", "333-33-3333", LedgerType.Hourly, 19.50M, 42);
-            //inNumberFirst = rand.Next(6);
-            //inNumberSecond = rand.Next(4);
-            //inNumberFull = inNumberFirst.ToString() + "_" + inNumberSecond.ToString();
             payments[4] = new Invoice(RandomNumGen(), "Flux Capacitor", 2, 3655.66M, LedgerType.Invoice);
-            //inNumberFirst = rand.Next(6);
-            //inNumberSecond = rand.Next(4);
-            //inNumberFull = inNumberFirst.ToString() + "_" + inNumberSecond.ToString();
             payments[5] = new Invoice(RandomNumGen(), "Flux Capacitor", 3, 14.50M, LedgerType.Invoice);
             //If these werent automatically added I would increment the counter, but it seems redundant since they are
             int arrayPlacement = 6;
@@ -79,7 +74,7 @@ namespace Hamblin_CashFlowManager
                         Console.WriteLine("Please input the hourly salary of the employee");
                          salInput = Console.ReadLine();
                         decimal hourlySal = 0;
-                         parseTry = decimal.TryParse(salInput, out weeklySal);
+                         parseTry = decimal.TryParse(salInput, out hourlySal);
                         if (parseTry == false)
                             break;
                         Console.WriteLine("Please input the number of hours worked");
@@ -104,15 +99,12 @@ namespace Hamblin_CashFlowManager
                         parseTry = decimal.TryParse(Console.ReadLine(), out partCost);
                         if (parseTry == false)
                             break;
-                        //inNumberFirst = rand.Next(6);
-                        //inNumberSecond = rand.Next(4);
-                        //inNumberFull = inNumberFirst.ToString() + "_" + inNumberSecond.ToString();
                         payments[arrayPlacement] = new Invoice(RandomNumGen(), partDescrip, partQuantity, partCost, LedgerType.Invoice);
                         arrayPlacement++;
                         break;
                     case "4":
                         Console.Clear();
-                        FinalCalculation(payments, arrayPlacement);
+                        Console.WriteLine(processor.FinalCalculation(payments, arrayPlacement));
                         Console.WriteLine("Thank you for using this Cashflow Manager");
                         keepLoop = false;
                         break;
@@ -124,43 +116,11 @@ namespace Hamblin_CashFlowManager
                 {
                     Console.Clear();
                     Console.WriteLine("List space exceeded, displaying output");
-                    FinalCalculation(payments, arrayPlacement);
+                    Console.WriteLine(processor.FinalCalculation(payments, arrayPlacement));
                     Console.WriteLine("Thank you for using this Cashflow Manager");
                     keepLoop = false;
                 }
             }
-        }
-        //Not sure why it needs to be static, look into it
-        public static void FinalCalculation(IPayable[] payableArray, int arrayPlace)
-        {
-            LedgerType type;
-            decimal finalIn = 0;
-            decimal finalSal = 0;
-            decimal finalHour = 0;
-            decimal finalOutput = 0;
-            for (int i = 0; i < arrayPlace; i++)
-            {
-                Console.WriteLine(payableArray[i].ToString());
-                type = payableArray[i].Type;
-                switch(type)
-                {
-                    case LedgerType.Invoice:
-                        finalIn += payableArray[i].GetPayableAmount();
-                        break;
-                    case LedgerType.Salaried:
-                        finalSal += payableArray[i].GetPayableAmount();
-                        break;
-                    case LedgerType.Hourly:
-                        finalHour += payableArray[i].GetPayableAmount();
-                        break;
-                }
-            }
-            finalOutput = finalIn + finalSal + finalHour;
-            Console.WriteLine("Total Weekly Payout: " + finalOutput.ToString("C2") + "\n\n" +
-                "Category Breakdown: \n" +
-                "   Invoices: " + finalIn.ToString("C2") + "\n" +
-                "   Salaried Payroll: " + finalSal.ToString("C2") + "\n" +
-                "   Hourly Payroll: " + finalHour.ToString("C2"));
         }
         public static string RandomNumGen()
         {

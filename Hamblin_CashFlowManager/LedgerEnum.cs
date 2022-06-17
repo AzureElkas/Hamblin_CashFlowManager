@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hamblin_CashFlowManager
 {
-    public enum LedgerType 
+    public enum LedgerType
     {
         Salaried,
         Hourly,
